@@ -5,7 +5,7 @@ General Quantum Monte Carlo Code
 Since the project is very basic, let's go quick and dirty:
 
 ```bash
-g++ -Wall -std=c++11 -Iinclude/ src/* -o qmc.x 
+clang++ -Wall -O3 -std=c++11 -Iinclude/ src/* -o qmc.x 
 ```
 
-Running the executable should just return to the prompt without output.
+Running the executable should just print "QMC begins" and "QMC ends".
