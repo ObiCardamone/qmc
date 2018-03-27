@@ -14,9 +14,23 @@
  */
 Walkers::Walkers( const std::size_t _nWalkers, const size_t _nSpinOrbs ) {
   this->nWalkers( _nWalkers ) ;
-  for( size_t iWalker=0 ; iWalker<this->nWalkers() ; iWalker++ ) {  
+  for( std::size_t iWalker=0 ; iWalker<this->nWalkers() ; iWalker++ ) {  
     this->my_determinants.push_back( boost::dynamic_bitset<>( _nSpinOrbs ) ) ;
   }
+  
+  for( size_t iLut=0 ; iLut<std::ceil( _nSpinOrbs / 8 ) ; iLut++ ) {
+    std::map< boost::dynamic_bitset<>, std::vector<size_t> > lut ;
+    for( size_t iOrb=0 ; iOrb<256 ; iOrb++ ) {
+      boost::dynamic_bitset<> key( 8, iOrb ) ;
+      std::vector<size_t> val ;
+      for( size_t iBit=0 ; iBit<8 ; iBit++ ) {
+	if( key.test( iBit ) ) val.push_back( iLut*8 + iBit ) ;
+      }
+      lut[key] = val ;
+    }
+    this->my_occupation_luts.push_back( lut ) ;
+  }
+
 }
 
 /**

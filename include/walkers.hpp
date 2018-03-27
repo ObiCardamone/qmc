@@ -8,6 +8,8 @@
 #define WALKERS_HPP
 
 // External includes
+#include <iostream>                 // std::cout and std::endl
+#include <map>                      // std::map
 #include <vector>                   // std::vector
 #include <boost/dynamic_bitset.hpp> // boost::dynamic_bitset
 
@@ -50,6 +52,7 @@ private:
   // TODO : We need to be able to keep track of the number of walkers on each determinant,
   //        as well as other bit flags, e.g. whether walker spawned from an initiator.
   std::vector< boost::dynamic_bitset<> > my_determinants ; 
+  std::vector< std::map< boost::dynamic_bitset<>, std::vector<size_t> > > my_occupation_luts ;
   
 } ;
 
